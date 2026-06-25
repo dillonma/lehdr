@@ -8,7 +8,8 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lehdr)](https://cran.r-project.org/package=lehdr)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/lehdr)](https://cran.r-project.org/package=lehdr)
-[![R-CMD-check](https://github.com/jamgreen/lehdr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jamgreen/lehdr/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/dillonma/lehdr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dillonma/lehdr/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/dillonma/lehdr/actions/workflows/pkgdown.yaml/badge.svg)](https://dillonma.github.io/lehdr/)
 <!-- badges: end -->
 
 **lehdr** (pronounced: *lee dur* like a metric *litre*) is an R package
@@ -20,6 +21,12 @@ workplace area characteristics, and residential area characteristics),
 aggregate them to common Census geographies, and now includes built-in
 analytical functions for commute flow statistics, longitudinal job
 change, and earnings tier shares.
+
+Full documentation and the Getting Started vignette are available at the
+[lehdr pkgdown site](https://dillonma.github.io/lehdr/). For a detailed
+walkthrough of all analytical functions and maps, see the [Getting
+Started
+vignette](https://dillonma.github.io/lehdr/articles/getting_started.html).
 
 ## Installation
 
