@@ -1,20 +1,46 @@
+url: https://dillonma.github.io/lehdr/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+home:
+  title: "lehdr: Access LODES Data in R"
+  description: >
+    Programmatic access to the U.S. Census Bureau's Longitudinal
+    Employer-Household Dynamics (LODES) dataset, with built-in tools
+    for commute flow statistics, longitudinal job change, and earnings
+    tier analysis.
+
 navbar:
   title: "lehdr"
   left:
-  - text: "Vignettes"
-    href: articles/index.html
-  - text: "Functions"
-    href: reference/index.html
-    
+    - text: "Get Started"
+      href: articles/getting_started.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
   right:
-  - icon: fa-twitter
-    href: https://twitter.com/surlyurbanist
-  - icon: fa-github
-    href: https://github.com/jamgreen/lehdr
-    
+    - icon: fa-github
+      href: https://github.com/dillonma/lehdr
+      aria-label: GitHub
+
 articles:
-  - title: "Getting Started"
-    desc: >
-      An introductory vignette covering installation of the package 
-      and its basic usage
-    contents: getting_started
+  - title: "Vignettes"
+    contents:
+      - getting_started
+
+reference:
+  - title: "Download LODES Data"
+    desc: "Functions for fetching LODES flat files and geographic crosswalks."
+    contents:
+      - grab_lodes
+      - grab_crosswalk
+      - aggregate_lodes_df
+  - title: "Analytical Functions"
+    desc: "Compute commute statistics, longitudinal change, and earnings distributions."
+    contents:
+      - compute_commute_stats
+      - compute_lodes_change
+      - compute_earnings_share
