@@ -242,6 +242,16 @@ The map below shows a flow-weighted job accessibility index for Baltimore City t
 knitr::include_graphics("vignettes/figures/fig4_balt_accessibility.png")
 ```
 
+## Maps
+
+All figures can be reproduced by running `source("data-raw/render_vignette_figures.R")` locally. The map below shows self-containment at the Census tract level for Baltimore City, Maryland --- a simple but powerful use of LODES OD data to understand which neighborhoods have strong local job access versus heavy out-commuting:
+
+```{r map-display, echo=FALSE, eval=TRUE, out.width="100%"}
+knitr::include_graphics("vignettes/figures/fig1_balt_self_containment.png")
+```
+
+See `vignette("getting_started")` for the full figure code and additional maps of Maryland county job change, earnings tier composition, and tract-level job accessibility.
+
 ## Caching
 
 Downloaded files are deleted after reading by default. Set `use_cache = TRUE` in `grab_lodes()` or `options(lehdr_use_cache = TRUE)` globally to retain files in the user cache directory (`tools::R_user_dir("lehdr", "cache")`). Cache filenames include the LODES version (e.g., `lodes8_md_wac_S000_JT00_2019.csv.gz`), so switching between versions will not serve stale data from a different vintage.
@@ -251,6 +261,16 @@ Downloaded files are deleted after reading by default. Set `use_cache = TRUE` in
 The LODES dataset is frequently used by transportation and economic development planners, regional economists, disaster managers, and other public servants who need fine-grained understanding of the spatial distribution of employment. Such data underpins regional travel demand models, workforce and industrial policy analysis, and, as a Census product, can be joined to Decennial or American Community Survey data to illuminate the relationship between population and employment geography.
 
 LODES is the only source of detailed geographic information on employment for the entire country, and **lehdr** is designed to make it more accessible for researchers and analysts working on regional development issues.
+
+## Citation
+
+If you use **lehdr** in published work, please cite it:
+
+```{r citation}
+citation("lehdr")
+```
+
+Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2025. "lehdr: Grab Longitudinal Employer-Household Dynamics (LEHD) Flat Files." R package version 1.2.0. https://github.com/jamgreen/lehdr/
 
 ## Acknowledgements
 
