@@ -39,6 +39,7 @@
 #'   sum to 1 within rounding error.
 #'
 #' @importFrom dplyr group_by summarise mutate select rename all_of any_of across where
+#' @importFrom stats setNames
 #' @importFrom glue glue
 #'
 #' @examples
