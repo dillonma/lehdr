@@ -256,6 +256,14 @@ See `vignette("getting_started")` for the full figure code and additional maps o
 
 Downloaded files are deleted after reading by default. Set `use_cache = TRUE` in `grab_lodes()` or `options(lehdr_use_cache = TRUE)` globally to retain files in the user cache directory (`tools::R_user_dir("lehdr", "cache")`). Cache filenames include the LODES version (e.g., `lodes8_md_wac_S000_JT00_2019.csv.gz`), so switching between versions will not serve stale data from a different vintage.
 
+**Upgrading from lehdr < 1.2.0?** Earlier versions cached files without a version prefix (e.g., `md_wac_S000_JT00_2019.csv.gz`). Those files will never be matched by the new naming scheme and can be safely deleted. To clear the entire cache:
+
+```{r cache-clear}
+cache_dir <- tools::R_user_dir("lehdr", "cache")
+list.files(cache_dir)          # inspect before deleting
+unlink(cache_dir, recursive = TRUE)
+```
+
 ## Why lehdr?
 
 The LODES dataset is frequently used by transportation and economic development planners, regional economists, disaster managers, and other public servants who need fine-grained understanding of the spatial distribution of employment. Such data underpins regional travel demand models, workforce and industrial policy analysis, and, as a Census product, can be joined to Decennial or American Community Survey data to illuminate the relationship between population and employment geography.
@@ -271,5 +279,9 @@ citation("lehdr")
 ```
 
 Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2025. "lehdr: Grab Longitudinal Employer-Household Dynamics (LEHD) Flat Files." R package version 1.2.0. https://github.com/jamgreen/lehdr/
+
+## Acknowledgements
+
+This package was developed by Jamaal Green, University of Pennsylvania; Dillon Mahmoudi, University of Maryland Baltimore County; and Liming Wang, Portland State University.
 
 This package would not exist in its current format without the inspiration of [Bob Rudis's](https://rud.is/b/) [lodes package](https://github.com/hrbrmstr/lodes).
