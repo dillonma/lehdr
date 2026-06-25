@@ -33,6 +33,7 @@ Imports:
     rlang,
     stringr
 Suggests:
+    ggplot2,
     knitr,
     rmarkdown,
     sf,
