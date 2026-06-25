@@ -37,6 +37,7 @@
 #'   than leave); negative values signal net exporters.
 #'
 #' @importFrom dplyr group_by summarise left_join mutate select rename all_of coalesce
+#' @importFrom rlang :=
 #' @importFrom glue glue
 #'
 #' @examples
@@ -117,7 +118,7 @@ compute_commute_stats <- function(od_df, agg_geo = "tract") {
       "geo",
       dplyr::any_of(grp_extras),
       workers_in, workers_out, workers_internal,
-      net_flow, self_containment
+      "net_flow", "self_containment"
     ) %>%
     dplyr::rename(!!agg_geo := "geo")
 
