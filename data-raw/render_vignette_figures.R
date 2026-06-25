@@ -163,10 +163,11 @@ earn_shares <- compute_earnings_share(
 md_county_names <- counties(state = "MD", year = 2019, cb = TRUE) %>%
   as_tibble() %>%
   mutate(GEOID = paste0(STATEFP, COUNTYFP)) %>%
-  select(GEOID, NAME)
+  select(GEOID, NAMELSAD)
 
 earn_shares <- earn_shares %>%
   left_join(md_county_names, by = c("w_county" = "GEOID")) %>%
+  rename(NAME = NAMELSAD) %>%
   mutate(
     tier = factor(tier, levels = c("high", "mid", "low"),
                   labels = c("High (> $3,333/mo)", "Mid ($1,251\u2013$3,333/mo)",
