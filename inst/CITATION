@@ -6,7 +6,7 @@ bibentry(
     person("Liming", "Wang"),
     person("Dillon", "Mahmoudi")
   ),
-  year     = "2025",
+  year     = "2026",
   note     = "R package version 1.2.0",
   url      = "https://github.com/jamgreen/lehdr/"
 )
