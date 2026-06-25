@@ -15,12 +15,15 @@ compute_earnings_share(
 \item{lodes_df}{A data frame (tibble) of LODES RAC or WAC data returned
 by \code{\link[=grab_lodes]{grab_lodes()}} with \code{segment = "S000"} (the total count segment,
 which includes all three earnings columns). Must contain columns
-\code{CE01}, \code{CE02}, and \code{CE03} (for WAC) or \code{CR01}, \code{CR02}, \code{CR03} (for
-RAC). See Details.}
+\code{CE01}, \code{CE02}, and \code{CE03}. Both WAC and RAC files include these
+earnings tier columns; the \code{type} argument controls only which
+geography prefix is used for auto-detection.}
 
 \item{type}{One of \code{"wac"} (workplace area characteristics, default) or
-\code{"rac"} (residential area characteristics). Controls which earnings
-columns are used.}
+\code{"rac"} (residential area characteristics). Controls the expected
+geography column prefix (\code{w_} for WAC, \code{h_} for RAC) when
+\code{geo_col = NULL}. Does not affect which earnings columns are used,
+as both file types share the \code{CE01}/\code{CE02}/\code{CE03} schema.}
 
 \item{geo_col}{The name of the geography column to group by, e.g.
 \code{"w_tract"} or \code{"h_county"}. Defaults to \code{NULL}, which auto-detects
@@ -39,9 +42,9 @@ columns are added for \code{share_low}, \code{share_mid}, and \code{share_high}.
 Computes the share of jobs (or workers) in each of the three
 LODES monthly earnings tiers:
 \describe{
-\item{Low (\code{CE01}/\code{CR01})}{Earnings up to $1,250/month.}
-\item{Mid (\code{CE02}/\code{CR02})}{Earnings $1,251-$3,333/month.}
-\item{High (\code{CE03}/\code{CR03})}{Earnings above $3,333/month.}
+\item{Low (\code{CE01})}{Earnings up to $1,250/month.}
+\item{Mid (\code{CE02})}{Earnings $1,251-$3,333/month.}
+\item{High (\code{CE03})}{Earnings above $3,333/month.}
 }
 
 Earnings shares are useful for tracking wage polarization, identifying
@@ -49,11 +52,8 @@ low-wage job concentration, and examining how the earnings structure of
 a labor market has shifted over time, especially when combined with
 \code{\link[=compute_lodes_change]{compute_lodes_change()}}.
 
-Note: For WAC data (\code{type = "wac"}), earnings columns are prefixed \code{CE}.
-For RAC data (\code{type = "rac"}), they are prefixed \code{CR}. The total
-denominator used is the sum of the three tiers (i.e., \code{C000}/\code{CA01}
-earnings sub-total), not the overall job count. This ensures shares sum
-to 1 within rounding.
+The total denominator is the sum of the three tiers, ensuring shares
+sum to 1 within rounding error.
 }
 \examples{
 \donttest{

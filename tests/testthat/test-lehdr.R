@@ -1,5 +1,5 @@
 # ============================================================
-# Tests for the lehdr package
+# Tests for the base fucntionality of the lehdr package
 #
 # Test states: DE (Delaware), VT (Vermont), ND (North Dakota),
 # SD (South Dakota), WY (Wyoming). These states are used because
@@ -195,20 +195,22 @@ test_that("grab_lodes LODES7 and LODES8 WAC differ in row count for the same yea
   withr::local_options(list(lehdr_use_cache = TRUE))
 
   lodes7_rows <- grab_lodes(
-    state      = "de",
+    state      = "vt",
     year       = 2015,
     version    = "LODES7",
     lodes_type = "wac"
   ) %>% nrow()
 
   lodes8_rows <- grab_lodes(
-    state      = "de",
+    state      = "vt",
     year       = 2015,
     version    = "LODES8",
     lodes_type = "wac"
   ) %>% nrow()
 
   # Different block vintages enumerate different numbers of blocks
+  # Note this test does not work for DE since the count of blocks remains
+  # the same across the vintages
   expect_false(lodes7_rows == lodes8_rows)
 })
 
