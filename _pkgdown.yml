@@ -37,7 +37,6 @@ reference:
     contents:
       - grab_lodes
       - grab_crosswalk
-      - aggregate_lodes_df
   - title: "Analytical Functions"
     desc: "Compute commute statistics, longitudinal change, and earnings distributions."
     contents:
