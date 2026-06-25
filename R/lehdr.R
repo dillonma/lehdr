@@ -252,7 +252,7 @@ grab_lodes <- function(
     dir.create(download_dir, recursive = TRUE)
   }
   fil <- normalizePath(
-    file.path(download_dir, basename(url)),
+    file.path(download_dir, paste0(tolower(version), "_", basename(url))),
     mustWork = FALSE
   )
 
