@@ -9,4 +9,4 @@
 ^\.github$
 ^data-raw$
 ^pkgdown$
-^vignettes/figures$
+^README_files$
