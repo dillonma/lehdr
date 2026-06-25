@@ -112,7 +112,10 @@ change_md <- compute_lodes_change(
   variables    = "C000"
 )
 
-md_county_geo <- counties(state = "MD", year = 2019, cb = TRUE) %>%
+# cb = FALSE required: cartographic boundary (cb = TRUE) drops NAMELSAD, keeping only NAME,
+# which causes Baltimore city and Baltimore County to both appear as "Baltimore".
+# Full TIGER file (cb = FALSE) preserves NAMELSAD for correct labeling.
+md_county_geo <- counties(state = "MD", year = 2019, cb = FALSE) %>%
   mutate(GEOID = paste0(STATEFP, COUNTYFP)) %>%
   select(GEOID, geometry)
 
@@ -160,7 +163,10 @@ earn_shares <- compute_earnings_share(
 )
 
 # Attach county names via tigris for readable labels
-md_county_names <- counties(state = "MD", year = 2019, cb = TRUE) %>%
+# cb = FALSE required: cartographic boundary (cb = TRUE) drops NAMELSAD, keeping only NAME,
+# which causes Baltimore city and Baltimore County to both appear as "Baltimore".
+# Full TIGER file (cb = FALSE) preserves NAMELSAD for correct labeling.
+md_county_names <- counties(state = "MD", year = 2019, cb = FALSE) %>%
   as_tibble() %>%
   mutate(GEOID = paste0(STATEFP, COUNTYFP)) %>%
   select(GEOID, NAMELSAD)
