@@ -159,12 +159,19 @@ vt_xwalk_7 <- grab_crosswalk("vt", version = "LODES7")
 
 ## Analytical Functions
 
-### Commute flow statistics (Option A)
+lehdr includes three functions for common LODES analyses. All examples below
+use Maryland, which has a rich and varied labor market geography: a large
+central city (Baltimore), dense inner suburbs, agricultural Eastern Shore
+counties, and strong federal-sector employment in the Washington suburbs.
+
+### Commute flow statistics
 
 `compute_commute_stats()` summarizes commute flows from an OD dataset into
-four per-geography metrics: inflow, outflow, internal flows, net flow, and
-the self-containment ratio. Self-containment is the share of employed
-residents who also work in the same geographic unit.
+per-geography metrics: workers arriving (inflow), workers departing (outflow),
+internal flows, net flow, and the self-containment ratio. Self-containment is
+the share of employed residents who also work within the same geographic unit
+--- a value close to 1 indicates a largely self-sufficient labor market, while
+values near 0 indicate heavy out-commuting.
 
 ```{r commute_stats}
 od_md <- grab_lodes(
@@ -187,17 +194,29 @@ commute_md %>%
 ```
 
 Net flow identifies counties that are net job importers (positive) versus
-net exporters (negative), a key indicator of job/housing imbalance.
+net exporters (negative), a key indicator of job/housing imbalance. The map
+below shows self-containment at the Census tract level for Baltimore City,
+where the pattern reflects the city's mix of dense employment centers and
+residential neighborhoods with limited local job access.
 
-### Longitudinal change (Option B)
+```{r fig1, eval=FALSE, echo=TRUE}
+# See data-raw/render_vignette_figures.R for the full figure code.
+# Requires: ggplot2, sf, tigris, scales
+```
+
+```{r fig1-display, echo=FALSE, eval=TRUE}
+knitr::include_graphics("figures/fig1_balt_self_containment.png")
+```
+
+### Longitudinal change
 
 `compute_lodes_change()` computes absolute and percentage change in any LODES
 variable between two years. The output can be wide (one row per geography,
-columns for each variable's change) or long (one row per geography-variable
-combination, suitable for `ggplot2`).
+with columns for each variable's change) or long (one row per
+geography-variable combination, suitable for `ggplot2`).
 
 ```{r lodes_change}
-wac_multi <- grab_lodes(
+wac_md_panel <- grab_lodes(
   state      = "md",
   year       = c(2010, 2019),
   lodes_type = "wac",
@@ -207,7 +226,7 @@ wac_multi <- grab_lodes(
 )
 
 change_md <- compute_lodes_change(
-  wac_multi,
+  wac_md_panel,
   geo_col      = "w_county",
   base_year    = 2010,
   compare_year = 2019,
@@ -221,34 +240,47 @@ change_md %>%
   head(10)
 ```
 
-Long format is useful for visualizing change across multiple variables:
+The map below shows the percent change in total jobs (`C000`) across Maryland
+counties from 2010 to 2019. The diverging palette highlights counties that
+gained jobs (blue) versus those that lost jobs (red) over the period.
 
-```{r lodes_change_long, eval=FALSE}
-library(ggplot2)
+```{r fig2, eval=FALSE, echo=TRUE}
+# See data-raw/render_vignette_figures.R for the full figure code.
+# Requires: ggplot2, sf, tigris, scales
+```
 
+```{r fig2-display, echo=FALSE, eval=TRUE}
+knitr::include_graphics("figures/fig2_md_job_change.png")
+```
+
+Long format is useful for visualizing change across multiple variables at
+once:
+
+```{r lodes_change_long}
 change_long <- compute_lodes_change(
-  wac_multi,
-  geo_col  = "w_county",
-  output   = "long",
+  wac_md_panel,
+  geo_col   = "w_county",
+  output    = "long",
   variables = c("CE01", "CE02", "CE03")
 )
 
-ggplot(change_long, aes(x = w_county, y = pct_change, fill = variable)) +
-  geom_col(position = "dodge") +
-  coord_flip() +
-  labs(
-    title = "Percent change in jobs by earnings tier, Maryland counties, 2010-2019",
-    x = NULL, y = "Percent change"
-  )
+# Suitable for use with ggplot2 facets or grouped geom_col()
+head(change_long)
 ```
 
-### Earnings tier shares (Option D)
+### Earnings tier shares
 
 `compute_earnings_share()` computes the distribution of jobs (or resident
-workers) across three monthly earnings tiers: low (up to $1,250/month),
-mid ($1,251-$3,333/month), and high (above $3,333/month). These tiers
-correspond to the `CE01`/`CE02`/`CE03` columns in WAC data and
-`CR01`/`CR02`/`CR03` in RAC data.
+workers) across three monthly earnings tiers defined by LODES:
+
+| Column | Tier  | Monthly earnings        |
+|--------|-------|-------------------------|
+| `CE01` | Low   | Up to $1,250            |
+| `CE02` | Mid   | $1,251 to $3,333        |
+| `CE03` | High  | Above $3,333            |
+
+Both WAC and RAC files include these columns; `type` controls only the
+geography prefix used for auto-detection (`w_` for WAC, `h_` for RAC).
 
 ```{r earnings_share}
 wac_md <- grab_lodes(
@@ -262,17 +294,45 @@ wac_md <- grab_lodes(
 
 earn_shares <- compute_earnings_share(wac_md, type = "wac", geo_col = "w_county")
 
-# Counties with highest share of low-wage jobs
+# Counties with the highest share of low-wage jobs
 earn_shares %>%
   arrange(desc(share_low)) %>%
   select(w_county, share_low, share_mid, share_high) %>%
   head(10)
 ```
 
-Combining `compute_earnings_share()` and `compute_lodes_change()` allows
-longitudinal tracking of wage polarization:
+Use `output = "long"` to get a format ready for stacked bar charts:
 
-```{r earnings_share_change, eval=FALSE}
+```{r earnings_share_long}
+earn_long <- compute_earnings_share(
+  wac_md,
+  type    = "wac",
+  geo_col = "w_county",
+  output  = "long"
+)
+
+head(earn_long)
+```
+
+The chart below shows the earnings tier composition for all Maryland counties
+in 2019, sorted by the share of low-wage jobs. Counties with a larger
+low-wage share tend to be more rural or tourism-dependent, while suburban
+counties closer to Washington, D.C. show higher shares of well-paid jobs.
+
+```{r fig3, eval=FALSE, echo=TRUE}
+# See data-raw/render_vignette_figures.R for the full figure code.
+# Requires: ggplot2, tigris, scales
+```
+
+```{r fig3-display, echo=FALSE, eval=TRUE}
+knitr::include_graphics("figures/fig3_md_earnings_shares.png")
+```
+
+Combining `compute_earnings_share()` and `compute_lodes_change()` supports
+longitudinal tracking of wage polarization. Compute shares for each year
+separately, then join and difference:
+
+```{r earnings_share_change}
 wac_panel <- grab_lodes(
   state      = "md",
   year       = c(2010, 2019),
@@ -282,8 +342,6 @@ wac_panel <- grab_lodes(
   agg_geo    = "county"
 )
 
-# Compute shares for each year separately, then use compute_lodes_change
-# on the resulting share columns for a custom polarization analysis.
 share_2010 <- compute_earnings_share(
   dplyr::filter(wac_panel, year == 2010),
   type = "wac", geo_col = "w_county"
@@ -297,21 +355,22 @@ share_2019 <- compute_earnings_share(
 
 ---
 
-## Advanced: Job Accessibility Index (Illustrative)
+## Mapping LODES Data
 
-The following is an illustrative example of a simple gravity-based job
-accessibility index computed entirely from LODES OD data. It is included
-here as a starting point; a full accessibility analysis typically requires
-additional data on travel times or distances (see packages such as `r5r` or
-`accessibility`).
+The figures in this vignette were produced with `ggplot2` and Census
+geometries from the `tigris` package. The general pattern is:
 
-The simplest accessibility measure is a raw count: for a given home
-geography, the number of reachable jobs. Using OD data, you can approximate
-a threshold-based accessibility score by counting the number of distinct
-work geographies connected to each home geography (i.e., the number of
-destinations with non-zero flows), weighted by flow volume.
+1. Download LODES data with `grab_lodes()`.
+2. Compute a derived variable with one of the analytical functions above.
+3. Fetch geometries with `tigris::tracts()`, `tigris::counties()`, etc.
+4. Join on the GEOID column and plot with `geom_sf()`.
 
-```{r accessibility, eval=FALSE}
+The following example shows a simple flow-weighted job accessibility index
+for Baltimore City tracts. For each home tract, the metric sums the total
+number of workers flowing to all reachable work tracts --- a proxy for labor
+market connectivity that can be computed entirely from LODES OD data.
+
+```{r accessibility}
 od_md <- grab_lodes(
   state      = "md",
   year       = 2019,
@@ -322,24 +381,33 @@ od_md <- grab_lodes(
   agg_geo    = "tract"
 )
 
-# Simple gravity-style accessibility: for each home tract, sum jobs
-# reachable (weighted by S000 flow counts, as a proxy for connectivity)
 accessibility <- od_md %>%
+  dplyr::filter(startsWith(h_tract, "24510")) %>%
   dplyr::group_by(h_tract) %>%
   dplyr::summarise(
-    n_dest         = dplyr::n_distinct(w_tract),
+    n_dest          = dplyr::n_distinct(w_tract),
     total_reachable = sum(S000, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  dplyr::arrange(desc(total_reachable))
+    .groups         = "drop"
+  )
 
 head(accessibility)
 ```
 
 `n_dest` captures the breadth of access (number of distinct job destinations
-a resident tract sends workers to), while `total_reachable` is a
-flow-weighted measure of aggregate connectivity. These can be mapped using
-`tigris` geometries via `grab_lodes(..., geometry = TRUE)`.
+a tract sends workers to), while `total_reachable` is a flow-weighted measure
+of aggregate connectivity. A full accessibility analysis typically incorporates
+travel times or distances (see packages such as `r5r` or `accessibility`);
+the LODES-only measure here is a useful starting point when network data are
+unavailable.
+
+```{r fig4, eval=FALSE, echo=TRUE}
+# See data-raw/render_vignette_figures.R for the full figure code.
+# Requires: ggplot2, sf, tigris, scales
+```
+
+```{r fig4-display, echo=FALSE, eval=TRUE}
+knitr::include_graphics("figures/fig4_balt_accessibility.png")
+```
 
 ---
 
@@ -354,3 +422,18 @@ set this option globally for a session:
 ```{r caching}
 options(lehdr_use_cache = TRUE)
 ```
+
+The cache filename includes the LODES version (e.g.,
+`lodes8_md_wac_S000_JT00_2019.csv.gz`), so switching between LODES versions
+will not serve stale data from a different vintage.
+
+---
+
+## Citation
+
+If you use **lehdr** in published work, please cite it. Running
+`citation("lehdr")` will return a BibTeX entry. In Chicago author-date style:
+
+> Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2025. "lehdr: Grab
+> Longitudinal Employer-Household Dynamics (LEHD) Flat Files." R package
+> version 1.2.0. https://github.com/jamgreen/lehdr/
