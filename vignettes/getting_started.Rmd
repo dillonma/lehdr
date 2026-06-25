@@ -427,6 +427,17 @@ The cache filename includes the LODES version (e.g.,
 `lodes8_md_wac_S000_JT00_2019.csv.gz`), so switching between LODES versions
 will not serve stale data from a different vintage.
 
+**Upgrading from lehdr < 1.2.0?** Earlier versions cached files without a
+version prefix (e.g., `md_wac_S000_JT00_2019.csv.gz`). Those files will
+never be matched by the new naming scheme and can be safely deleted. To
+clear the entire cache:
+
+```{r cache-clear}
+cache_dir <- tools::R_user_dir("lehdr", "cache")
+list.files(cache_dir)          # inspect before deleting
+unlink(cache_dir, recursive = TRUE)
+```
+
 ---
 
 ## Citation
