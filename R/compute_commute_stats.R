@@ -114,7 +114,7 @@ compute_commute_stats <- function(od_df, agg_geo = "tract") {
       )
     ) %>%
     dplyr::select(
-      geo = .data$geo,
+      "geo",
       dplyr::any_of(grp_extras),
       workers_in, workers_out, workers_internal,
       net_flow, self_containment
