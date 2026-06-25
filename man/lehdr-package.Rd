@@ -6,7 +6,7 @@
 \alias{lehdr-package}
 \title{lehdr: Grab Longitudinal Employer-Household Dynamics (LEHD) Flat Files}
 \description{
-Designed to query Longitudinal Employer-Household Dynamics (LEHD) workplace/residential association and origin-destination flat files and optionally aggregate Census block-level data to block group, tract, county, or state. Data comes from the LODES FTP server \url{https://lehd.ces.census.gov/data/lodes/LODES8/}.
+Designed to query Longitudinal Employer-Household Dynamics (LEHD) workplace/residential association and origin-destination flat files and optionally aggregate Census block-level data to block group, tract, county, or state. Also provides analytical functions for commute flow statistics, longitudinal change, and earnings tier distributions. Data comes from the LODES FTP server \url{https://lehd.ces.census.gov/data/lodes/LODES8/}.
 }
 \seealso{
 Useful links:
@@ -21,6 +21,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Jamaal Green \email{jamaal.green@gmail.com}
   \item Liming Wang \email{lmwang@pdx.edu}
   \item Dillon Mahmoudi \email{dillonm@umbc.edu}
 }

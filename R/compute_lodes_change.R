@@ -33,8 +33,7 @@
 #'   \eqn{(\text{compare} - \text{base}) / \text{base} \times 100}.
 #'   Returns `NA` where `base_value` is zero or missing.
 #'
-#' @importFrom dplyr filter select group_by summarise left_join mutate rename
-#'   all_of any_of where
+#' @importFrom dplyr filter select group_by summarise left_join mutate rename all_of any_of where
 #' @importFrom tidyr pivot_longer
 #' @importFrom glue glue
 #'

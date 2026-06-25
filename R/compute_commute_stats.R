@@ -36,8 +36,7 @@
 #'   indicator: positive values signal net job importers (more workers arrive
 #'   than leave); negative values signal net exporters.
 #'
-#' @importFrom dplyr group_by summarise left_join mutate select rename
-#'   all_of coalesce
+#' @importFrom dplyr group_by summarise left_join mutate select rename all_of coalesce
 #' @importFrom glue glue
 #'
 #' @examples

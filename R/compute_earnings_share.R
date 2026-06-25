@@ -38,8 +38,7 @@
 #'   earnings sub-total), not the overall job count. This ensures shares sum
 #'   to 1 within rounding.
 #'
-#' @importFrom dplyr group_by summarise mutate select rename all_of any_of
-#'   across where
+#' @importFrom dplyr group_by summarise mutate select rename all_of any_of across where
 #' @importFrom tidyr pivot_longer
 #' @importFrom glue glue
 #'
