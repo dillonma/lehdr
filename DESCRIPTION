@@ -31,14 +31,14 @@ Imports:
     magrittr,
     readr,
     rlang,
-    stringr
+    stringr,
+    tidyr
 Suggests:
     ggplot2,
     knitr,
     rmarkdown,
     sf,
     testthat (>= 3.0.0),
-    tidyr,
     tigris,
     withr
 VignetteBuilder:
