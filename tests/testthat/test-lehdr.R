@@ -1,3 +1,13 @@
+# ============================================================
+# Tests base functionality to retrieve lehd data
+# These tests use DE (Delaware), VT (Vermont), ND 
+# (North Dakota), SD (South Dakota), and WY (Wyoming) as test
+# test states because the data is relatively small and fast 
+# to download.
+# ============================================================
+
+# ---- grab_lodes () ------------------------------------------
+
 test_that("test grab lodes od", {
   withr::local_options(list(lehdr_use_cache = TRUE))
 
@@ -128,6 +138,8 @@ test_that("test grab lodes wac", {
   )
 })
 
+# ---- grab_lodes () ---- multi-state -------------------------
+
 test_that("test grab lodes od for multiple states and years", {
   withr::local_options(list(lehdr_use_cache = TRUE))
 
@@ -172,6 +184,8 @@ test_that("test grab lodes od for multiple states and years", {
     c(1125184, 15)
   )
 })
+
+# ---- grab_lodes () ---- multi-state and multi-year-----------
 
 test_that("test grab lodes wac for multiple states and years", {
   withr::local_options(list(lehdr_use_cache = TRUE))
@@ -339,10 +353,9 @@ test_that("test join_lodes_geometry", {
 
 
 # ============================================================
-# Tests for new analytical functions in lehdr v1.2.0
+# Tests new analytical functions introduced in lehdr v1.2.0
 # These tests use DE (Delaware) as the test state because it
-# is small and fast to download, consistent with the existing
-# test suite.
+# is small and fast to download.
 # ============================================================
 
 # ---- compute_commute_stats() --------------------------------
