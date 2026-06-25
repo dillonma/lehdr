@@ -187,28 +187,29 @@ test_that("grab_lodes returns correct dimensions for WAC block-level LODES8", {
   )
 })
 
-# LODES7 and LODES8 use different Census block vintages, so column
-# counts differ for the same state and year range. This test
-# documents that version drives column structure, not just coverage.
-test_that("grab_lodes LODES7 and LODES8 WAC differ in column count for same year", {
+# LODES7 and LODES8 use different Census block vintages and cover different
+# year ranges, so results for the same state differ in row count. Block-level
+# column schema is identical across versions (both WAC files have 55 columns
+# plus year and state), so this test documents the row-count difference.
+test_that("grab_lodes LODES7 and LODES8 WAC differ in row count for the same year", {
   withr::local_options(list(lehdr_use_cache = TRUE))
 
-  lodes7_cols <- grab_lodes(
+  lodes7_rows <- grab_lodes(
     state      = "de",
     year       = 2015,
     version    = "LODES7",
     lodes_type = "wac"
-  ) %>% ncol()
+  ) %>% nrow()
 
-  lodes8_cols <- grab_lodes(
+  lodes8_rows <- grab_lodes(
     state      = "de",
     year       = 2015,
     version    = "LODES8",
     lodes_type = "wac"
-  ) %>% ncol()
+  ) %>% nrow()
 
-  # LODES8 WAC has more columns than LODES7 WAC
-  expect_true(lodes8_cols > lodes7_cols)
+  # Different block vintages enumerate different numbers of blocks
+  expect_false(lodes7_rows == lodes8_rows)
 })
 
 # ---- grab_lodes(): input validation ---------------------------
@@ -1014,23 +1015,20 @@ test_that("compute_earnings_share auto-detects geo_col and emits an inform messa
   )
 })
 
-test_that("compute_earnings_share aborts when type = rac is used on WAC data", {
-  withr::local_options(list(lehdr_use_cache = TRUE))
-
-  wac <- grab_lodes(
-    state      = "de",
-    year       = 2020,
-    version    = "LODES8",
-    lodes_type = "wac",
-    job_type   = "JT00",
-    segment    = "S000",
-    agg_geo    = "county"
+test_that("compute_earnings_share aborts when CE earnings columns are absent", {
+  # Both WAC and RAC files include CE01/CE02/CE03 (earnings tiers). The
+  # function should abort when those columns are missing, e.g. when the user
+  # accidentally passes OD data or a non-S000 segment that lacks earnings cols.
+  od_stub <- data.frame(
+    w_tract = "10001001",
+    h_tract = "10001002",
+    S000    = 50L,
+    year    = 2020L
   )
 
-  # WAC data lacks CR01/CR02/CR03; requesting type = "rac" should abort
   expect_error(
-    compute_earnings_share(wac, type = "rac", geo_col = "w_county"),
-    "CR0"
+    compute_earnings_share(od_stub, type = "wac", geo_col = "w_tract"),
+    "CE0"
   )
 })
 
