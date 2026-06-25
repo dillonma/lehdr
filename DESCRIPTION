@@ -20,8 +20,8 @@ Description: Designed to query Longitudinal Employer-Household Dynamics
     Data comes from the LODES FTP server
     <https://lehd.ces.census.gov/data/lodes/LODES8/>.
 License: MIT + file LICENSE
-URL: https://github.com/jamgreen/lehdr/
-BugReports: https://github.com/jamgreen/lehdr/issues/
+URL: https://dillonma.github.io/lehdr/, https://github.com/dillonma/lehdr/
+BugReports: https://github.com/dillonma/lehdr/issues/
 Depends:
     R (>= 4.1.0)
 Imports:
@@ -36,6 +36,7 @@ Imports:
 Suggests:
     ggplot2,
     knitr,
+    pkgdown,
     rmarkdown,
     sf,
     testthat (>= 3.0.0),
