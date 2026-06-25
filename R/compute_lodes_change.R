@@ -34,6 +34,7 @@
 #'   Returns `NA` where `base_value` is zero or missing.
 #'
 #' @importFrom dplyr filter select group_by summarise left_join mutate rename all_of any_of where
+#' @importFrom rlang :=
 #' @importFrom tidyr pivot_longer
 #' @importFrom glue glue
 #'
@@ -107,7 +108,7 @@ compute_lodes_change <- function(
 
   # Determine numeric variables to compare
   if (is.null(variables)) {
-    variables <- names(dplyr::select(lodes_df, where(is.numeric), -year))
+    variables <- names(dplyr::select(lodes_df, where(is.numeric), -dplyr::all_of("year")))
   }
   missing_vars <- setdiff(variables, names(lodes_df))
   if (length(missing_vars) > 0) {
