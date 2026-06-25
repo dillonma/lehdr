@@ -12,9 +12,11 @@ comes from the LODES FTP server
 
 Useful links:
 
-- <https://github.com/jamgreen/lehdr/>
+- <https://dillonma.github.io/lehdr/>
 
-- Report bugs at <https://github.com/jamgreen/lehdr/issues/>
+- <https://github.com/dillonma/lehdr/>
+
+- Report bugs at <https://github.com/dillonma/lehdr/issues/>
 
 ## Author
 
