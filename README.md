@@ -288,6 +288,17 @@ include the LODES version (e.g., `lodes8_md_wac_S000_JT00_2019.csv.gz`),
 so switching between versions will not serve stale data from a different
 vintage.
 
+**Upgrading from lehdr \< 1.2.0?** Earlier versions cached files without
+a version prefix (e.g., `md_wac_S000_JT00_2019.csv.gz`). Those files
+will never be matched by the new naming scheme and can be safely
+deleted. To clear the entire cache:
+
+``` r
+cache_dir <- tools::R_user_dir("lehdr", "cache")
+list.files(cache_dir)          # inspect before deleting
+unlink(cache_dir, recursive = TRUE)
+```
+
 ## Why lehdr?
 
 The LODES dataset is frequently used by transportation and economic
@@ -314,6 +325,12 @@ citation("lehdr")
 Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2025. “lehdr: Grab
 Longitudinal Employer-Household Dynamics (LEHD) Flat Files.” R package
 version 1.2.0. <https://github.com/jamgreen/lehdr/>
+
+## Acknowledgements
+
+This package was developed by Jamaal Green, University of Pennsylvania;
+Dillon Mahmoudi, University of Maryland Baltimore County; and Liming
+Wang, Portland State University.
 
 This package would not exist in its current format without the
 inspiration of [Bob Rudis’s](https://rud.is/b/) [lodes
