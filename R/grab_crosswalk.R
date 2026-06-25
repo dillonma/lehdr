@@ -64,8 +64,9 @@ download_xwalk <- function(url, download_dir) {
   if (!dir.exists(download_dir)) {
     dir.create(download_dir, recursive = TRUE)
   }
+  lodes_version <- tolower(regmatches(url, regexpr("LODES[0-9]+", url)))
   fil <- normalizePath(
-    file.path(download_dir, basename(url)),
+    file.path(download_dir, paste0(lodes_version, "_", basename(url))),
     mustWork = FALSE
   )
 
