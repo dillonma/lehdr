@@ -92,6 +92,7 @@ A tibble with one row per geography, containing:
 #> Download complete: lodes8_md_od_main_JT00_2019.csv.gz
 #> lodes8_md_od_main_JT00_2019.csv.gz cleared from cache.
   compute_commute_stats(od, agg_geo = "county")
+#> compute_commute_stats(): reducing 576 origin-destination pairs to one row per county.
 #> # A tibble: 24 × 8
 #>    county  year state workers_in workers_out workers_internal net_flow
 #>    <chr>  <int> <chr>      <dbl>       <dbl>            <dbl>    <dbl>
