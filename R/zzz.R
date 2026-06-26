@@ -6,6 +6,7 @@
   ver <- as.character(utils::packageVersion("lehdr"))
   packageStartupMessage(
     "lehdr ", ver, "\n",
+    "To enable caching of data, set `options(lehdr_use_cache = TRUE)`", "\n"
     "\n",
     "To cite lehdr in published work (Chicago author-date):\n",
     "\n",
