@@ -564,13 +564,12 @@ agg_geo_col <- function(agg_geo, before = "w") {
 #' @param agg_geo Target geography, e.g. `"tract"`, `"county"`, `"state"`,
 #'   `"bg"`.
 #' @description Internal helper that truncates GEOID strings and sums
-#'   numeric columns. Exported for advanced users who need to re-aggregate
-#'   after post-processing.
+#'   numeric columns.
 #' @importFrom dplyr mutate across group_by summarise ungroup
 #' @importFrom glue glue
 #' @importFrom stats na.omit
 #' @importFrom stringr str_extract str_replace
-#' @export
+#' @noRd
 aggregate_lodes_df <- function(lehdr_df, agg_geo) {
   lehdr_df <- lehdr_df %>%
     mutate(across(
