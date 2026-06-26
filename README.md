@@ -60,6 +60,14 @@ and LODES version. The table type is set with `lodes_type`:
 origin-destination (`"od"`), residential area characteristics (`"rac"`),
 or workplace area characteristics (`"wac"`).
 
+> **OD files return one row per origin-destination pair, not one row per
+> geography.** A county-level OD pull for a state with 55 counties will
+> return thousands of rows -- one for each observed county-to-county flow
+> pair. This is the correct structure for a flow matrix. To reduce an OD
+> tibble to one row per geography (with inflow, outflow, net flow, and
+> self-containment), pass it to `compute_commute_stats()`. See the
+> [Analytical Functions](#analytical-functions) section below.
+
 For example, Oregon (`state = "or"`) for 2020 (`year = 2020`) from LODES
 version 8 (`version = "LODES8"`, the default), origin-destination
 (`lodes_type = "od"`), primary jobs (`job_type = "JT01"`, the default),
@@ -171,6 +179,13 @@ per-geography inflow, outflow, internal flow, net flow, and
 self-containment ratio. Self-containment is the share of employed
 residents who also work within the same geographic unit.
 
+Because OD data are a flow matrix (one row per origin-destination pair),
+`compute_commute_stats()` is the correct way to collapse them to one row
+per geography. The function emits an informational message showing how
+many pairs were reduced -- e.g., `"reducing 2854 origin-destination pairs
+to one row per county"` -- so you can confirm the reduction happened as
+expected.
+
 ``` r
 od_md <- grab_lodes(
   state      = "md",
@@ -273,7 +288,7 @@ Baltimore City tracts, computed directly from LODES OD data:
 ## Maps
 
 All figures can be reproduced by running
-`source("data-raw/render_vignette_figures.R")` locally. The map below
+`source("data-raw/paper_figures.R")` locally. The map below
 shows self-containment at the Census tract level for Baltimore City,
 Maryland — a simple but powerful use of LODES OD data to understand
 which neighborhoods have strong local job access versus heavy
