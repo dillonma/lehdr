@@ -3,10 +3,11 @@
 ## Authors
 
 - **Jamaal Green**. Maintainer, author.
+  [](https://orcid.org/0000-0002-8322-8654)
 
 - **Liming Wang**. Author.
 
-- **Dillon Mahmoudi**. Author.
+- **Dillon Mahmoudi**. Author. [](https://orcid.org/0000-0002-8816-1639)
 
 - **Matthew Rogers**. Contributor.
 

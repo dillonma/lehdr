@@ -21,14 +21,17 @@ Useful links:
 ## Author
 
 **Maintainer**: Jamaal Green <jamaal.green@gmail.com>
+([ORCID](https://orcid.org/0000-0002-8322-8654))
 
 Authors:
 
 - Jamaal Green <jamaal.green@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-8322-8654))
 
 - Liming Wang <lmwang@pdx.edu>
 
 - Dillon Mahmoudi <dillonm@umbc.edu>
+  ([ORCID](https://orcid.org/0000-0002-8816-1639))
 
 Other contributors:
 

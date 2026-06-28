@@ -15,6 +15,15 @@ internal flows as both in and out). This is an unsigned flow balance
 indicator: positive values signal net job importers (more workers arrive
 than leave); negative values signal net exporters.
 
+**Cross-state commuters:** When `state_part = "main"` is used in
+[`grab_lodes()`](https://dillonma.github.io/lehdr/reference/grab_lodes.md),
+only workers who live and work in the same state are included. Workers
+who cross state lines (e.g., Maryland residents working in DC) appear
+only in `state_part = "aux"` files for the *workplace* state. To capture
+full commute flows for border counties, retrieve both `"main"` and
+`"aux"` files and bind the rows before calling
+`compute_commute_stats()`.
+
 ## Usage
 
 ``` r
@@ -31,6 +40,16 @@ compute_commute_stats(od_df, agg_geo = "tract")
   geography), `w_{agg_geo}` (work geography), and `S000` (total job
   count). The data frame may be at any aggregation level supported by
   `agg_geo`.
+
+  **Note on row structure:** LODES OD files are a flow matrix. A call to
+  [`grab_lodes()`](https://dillonma.github.io/lehdr/reference/grab_lodes.md)
+  with `lodes_type = "od"` returns one row per *origin-destination
+  pair*, not one row per geography – even after aggregation via
+  `agg_geo`. For example, a county-level OD pull for West Virginia
+  returns ~2,800 rows (one per observed county-county flow pair), not 55
+  (the number of counties). Pass the result directly to
+  `compute_commute_stats()` to reduce the pair table to one row per
+  geography with inflow, outflow, net flow, and self-containment.
 
 - agg_geo:
 
