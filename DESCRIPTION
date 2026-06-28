@@ -3,13 +3,15 @@ Package: lehdr
 Title: Grab Longitudinal Employer-Household Dynamics (LEHD) Flat Files
 Version: 1.2.0
 Authors@R: c(
-    person("Jamaal", "Green", , "jamaal.green@gmail.com", role = c("cre", "aut")),
+    person("Jamaal", "Green", , "jamaal.green@gmail.com", role = c("cre", "aut"),
+          comment = c(ORCID = "0000-0002-8322-8654")),
     person("Liming", "Wang", , "lmwang@pdx.edu", role = "aut"),
-    person("Dillon", "Mahmoudi", , "dillonm@umbc.edu", role = "aut"),
+    person("Dillon", "Mahmoudi", , "dillonm@umbc.edu", role = "aut",
+          comment = c(ORCID = "0000-0002-8816-1639")),),
     person("Matthew", "Rogers", , "matthew.rogers09@gmail.com", role = "ctb"),
     person("Kyle", "Walker", , "kyle@walker-data.com", role = "ctb"),
     person("Eli", "Pousson", , "eli.pousson@gmail.com", role = "ctb",
-           comment = c(ORCID = "0000-0001-8280-1706"))
+          comment = c(ORCID = "0000-0001-8280-1706"))
   )
 Maintainer: Jamaal Green <jamaal.green@gmail.com>
 Description: Designed to query Longitudinal Employer-Household Dynamics
