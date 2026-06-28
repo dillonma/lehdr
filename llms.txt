@@ -10,11 +10,12 @@ aggregate them to common Census geographies, and now includes built-in
 analytical functions for commute flow statistics, longitudinal job
 change, and earnings tier shares.
 
-Full documentation and the Getting Started vignette are available at the
-[lehdr pkgdown site](https://dillonma.github.io/lehdr/). For a detailed
-walkthrough of all analytical functions and maps, see the [Getting
-Started
-vignette](https://dillonma.github.io/lehdr/articles/getting_started.html).
+> \[!TIP\] Full documentation and the Getting Started vignette are
+> available at the [lehdr pkgdown
+> site](https://dillonma.github.io/lehdr/). \*\*For a detailed
+> walkthrough of all analytical functions and maps, see the [Getting
+> Started
+> vignette](https://dillonma.github.io/lehdr/articles/getting_started.html).
 
 ## Installation
 
@@ -52,15 +53,6 @@ function downloads data for a specific state, year, and LODES version.
 The table type is set with `lodes_type`: origin-destination (`"od"`),
 residential area characteristics (`"rac"`), or workplace area
 characteristics (`"wac"`).
-
-> **OD files return one row per origin-destination pair, not one row per
-> geography.** A county-level OD pull for a state with 55 counties will
-> return thousands of rows – one for each observed county-to-county flow
-> pair. This is the correct structure for a flow matrix. To reduce an OD
-> tibble to one row per geography (with inflow, outflow, net flow, and
-> self-containment), pass it to
-> [`compute_commute_stats()`](https://dillonma.github.io/lehdr/reference/compute_commute_stats.md).
-> See the [Analytical Functions](#analytical-functions) section below.
 
 For example, Oregon (`state = "or"`) for 2020 (`year = 2020`) from LODES
 version 8 (`version = "LODES8"`, the default), origin-destination
@@ -179,14 +171,6 @@ internal flow, net flow, and self-containment ratio. Self-containment is
 the share of employed residents who also work within the same geographic
 unit.
 
-Because OD data are a flow matrix (one row per origin-destination pair),
-[`compute_commute_stats()`](https://dillonma.github.io/lehdr/reference/compute_commute_stats.md)
-is the correct way to collapse them to one row per geography. The
-function emits an informational message showing how many pairs were
-reduced – e.g.,
-`"reducing 2854 origin-destination pairs to one row per county"` – so
-you can confirm the reduction happened as expected.
-
 ``` r
 
 od_md <- grab_lodes(
@@ -297,10 +281,11 @@ Baltimore City tracts, computed directly from LODES OD data:
 ## Maps
 
 All figures can be reproduced by running
-`source("data-raw/paper_figures.R")` locally. The map below shows
-self-containment at the Census tract level for Baltimore City, Maryland
-— a simple but powerful use of LODES OD data to understand which
-neighborhoods have strong local job access versus heavy out-commuting:
+`source("data-raw/render_vignette_figures.R")` locally. The map below
+shows self-containment at the Census tract level for Baltimore City,
+Maryland — a simple but powerful use of LODES OD data to understand
+which neighborhoods have strong local job access versus heavy
+out-commuting:
 
 ![](articles/figures/fig1_balt_self_containment.png)
 

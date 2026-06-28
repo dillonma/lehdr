@@ -52,7 +52,9 @@
 <!-- badges: start -->
 
 <p><strong>lehdr</strong> (pronounced: <em>lee dur</em> like a metric <em>litre</em>) is an R package that allows users to interface with the <a href="https://lehd.ces.census.gov/" class="external-link">Longitudinal Employer-Household Dynamics (LEHD)</a> Origin-Destination Employment Statistics (LODES) dataset, returned as tidy data frames. The package is designed to download LODES flat files (origin-destination, workplace area characteristics, and residential area characteristics), aggregate them to common Census geographies, and now includes built-in analytical functions for commute flow statistics, longitudinal job change, and earnings tier shares.</p>
-<p>Full documentation and the Getting Started vignette are available at the <a href="https://dillonma.github.io/lehdr/">lehdr pkgdown site</a>. For a detailed walkthrough of all analytical functions and maps, see the <a href="https://dillonma.github.io/lehdr/articles/getting_started.html">Getting Started vignette</a>.</p>
+<blockquote>
+<p>[!TIP] Full documentation and the Getting Started vignette are available at the <a href="https://dillonma.github.io/lehdr/">lehdr pkgdown site</a>. **For a detailed walkthrough of all analytical functions and maps, see the <a href="https://dillonma.github.io/lehdr/articles/getting_started.html">Getting Started vignette</a>.</p>
+</blockquote>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -73,9 +75,6 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>lehdr_use_cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>The <code><a href="reference/grab_lodes.html">grab_lodes()</a></code> function downloads data for a specific state, year, and LODES version. The table type is set with <code>lodes_type</code>: origin-destination (<code>"od"</code>), residential area characteristics (<code>"rac"</code>), or workplace area characteristics (<code>"wac"</code>).</p>
-<blockquote>
-<p><strong>OD files return one row per origin-destination pair, not one row per geography.</strong> A county-level OD pull for a state with 55 counties will return thousands of rows – one for each observed county-to-county flow pair. This is the correct structure for a flow matrix. To reduce an OD tibble to one row per geography (with inflow, outflow, net flow, and self-containment), pass it to <code><a href="reference/compute_commute_stats.html">compute_commute_stats()</a></code>. See the <a href="#analytical-functions">Analytical Functions</a> section below.</p>
-</blockquote>
 <p>For example, Oregon (<code>state = "or"</code>) for 2020 (<code>year = 2020</code>) from LODES version 8 (<code>version = "LODES8"</code>, the default), origin-destination (<code>lodes_type = "od"</code>), primary jobs (<code>job_type = "JT01"</code>, the default), all worker segments (<code>segment = "S000"</code>, the default), aggregated to the Census tract level (<code>agg_geo = "tract"</code>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">or_od</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/grab_lodes.html">grab_lodes</a></span><span class="op">(</span></span>
@@ -159,7 +158,6 @@
 <h3 id="commute-flow-statistics">Commute flow statistics<a class="anchor" aria-label="anchor" href="#commute-flow-statistics"></a>
 </h3>
 <p><code><a href="reference/compute_commute_stats.html">compute_commute_stats()</a></code> takes an OD data frame and returns per-geography inflow, outflow, internal flow, net flow, and self-containment ratio. Self-containment is the share of employed residents who also work within the same geographic unit.</p>
-<p>Because OD data are a flow matrix (one row per origin-destination pair), <code><a href="reference/compute_commute_stats.html">compute_commute_stats()</a></code> is the correct way to collapse them to one row per geography. The function emits an informational message showing how many pairs were reduced – e.g., <code>"reducing 2854 origin-destination pairs to one row per county"</code> – so you can confirm the reduction happened as expected.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">od_md</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/grab_lodes.html">grab_lodes</a></span><span class="op">(</span></span>
 <span>  state      <span class="op">=</span> <span class="st">"md"</span>,</span>
@@ -242,7 +240,7 @@
 <div class="section level2">
 <h2 id="maps">Maps<a class="anchor" aria-label="anchor" href="#maps"></a>
 </h2>
-<p>All figures can be reproduced by running <code>source("data-raw/paper_figures.R")</code> locally. The map below shows self-containment at the Census tract level for Baltimore City, Maryland — a simple but powerful use of LODES OD data to understand which neighborhoods have strong local job access versus heavy out-commuting:</p>
+<p>All figures can be reproduced by running <code>source("data-raw/render_vignette_figures.R")</code> locally. The map below shows self-containment at the Census tract level for Baltimore City, Maryland — a simple but powerful use of LODES OD data to understand which neighborhoods have strong local job access versus heavy out-commuting:</p>
 <p><img src="articles/figures/fig1_balt_self_containment.png" alt="" width="100%"></p>
 <p>See <code><a href="articles/getting_started.html">vignette("getting_started")</a></code> for the full figure code and additional maps of Maryland county job change, earnings tier composition, and tract-level job accessibility.</p>
 </div>
