@@ -18,13 +18,13 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jamaal Green \email{jamaal.green@gmail.com}
+\strong{Maintainer}: Jamaal Green \email{jamaal.green@gmail.com} (\href{https://orcid.org/0000-0002-8322-8654}{ORCID})
 
 Authors:
 \itemize{
-  \item Jamaal Green \email{jamaal.green@gmail.com}
+  \item Jamaal Green \email{jamaal.green@gmail.com} (\href{https://orcid.org/0000-0002-8322-8654}{ORCID})
   \item Liming Wang \email{lmwang@pdx.edu}
-  \item Dillon Mahmoudi \email{dillonm@umbc.edu}
+  \item Dillon Mahmoudi \email{dillonm@umbc.edu} (\href{https://orcid.org/0000-0002-8816-1639}{ORCID})
 }
 
 Other contributors:

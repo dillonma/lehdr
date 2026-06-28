@@ -7,7 +7,7 @@ Authors@R: c(
           comment = c(ORCID = "0000-0002-8322-8654")),
     person("Liming", "Wang", , "lmwang@pdx.edu", role = "aut"),
     person("Dillon", "Mahmoudi", , "dillonm@umbc.edu", role = "aut",
-          comment = c(ORCID = "0000-0002-8816-1639")),),
+          comment = c(ORCID = "0000-0002-8816-1639")),
     person("Matthew", "Rogers", , "matthew.rogers09@gmail.com", role = "ctb"),
     person("Kyle", "Walker", , "kyle@walker-data.com", role = "ctb"),
     person("Eli", "Pousson", , "eli.pousson@gmail.com", role = "ctb",

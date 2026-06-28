@@ -11,7 +11,16 @@ compute_commute_stats(od_df, agg_geo = "tract")
 returned by \code{\link[=grab_lodes]{grab_lodes()}} with \code{lodes_type = "od"}. Must include
 columns \verb{h_\{agg_geo\}} (home geography), \verb{w_\{agg_geo\}} (work geography),
 and \code{S000} (total job count). The data frame may be at any aggregation
-level supported by \code{agg_geo}.}
+level supported by \code{agg_geo}.
+
+\strong{Note on row structure:} LODES OD files are a flow matrix. A call to
+\code{\link[=grab_lodes]{grab_lodes()}} with \code{lodes_type = "od"} returns one row per
+\emph{origin-destination pair}, not one row per geography -- even after
+aggregation via \code{agg_geo}. For example, a county-level OD pull for West
+Virginia returns ~2,800 rows (one per observed county-county flow pair),
+not 55 (the number of counties). Pass the result directly to
+\code{compute_commute_stats()} to reduce the pair table to one row per
+geography with inflow, outflow, net flow, and self-containment.}
 
 \item{agg_geo}{The geographic level of the OD data. Must match the level
 at which \code{od_df} was retrieved or aggregated. One of \code{"block"}, \code{"bg"},
@@ -45,6 +54,14 @@ Net flow is defined as inbound workers minus outbound workers (including
 internal flows as both in and out). This is an unsigned flow balance
 indicator: positive values signal net job importers (more workers arrive
 than leave); negative values signal net exporters.
+
+\strong{Cross-state commuters:} When \code{state_part = "main"} is used in
+\code{\link[=grab_lodes]{grab_lodes()}}, only workers who live and work in the same state are
+included. Workers who cross state lines (e.g., Maryland residents working
+in DC) appear only in \code{state_part = "aux"} files for the \emph{workplace}
+state. To capture full commute flows for border counties, retrieve both
+\code{"main"} and \code{"aux"} files and bind the rows before calling
+\code{compute_commute_stats()}.
 }
 \examples{
 \donttest{
