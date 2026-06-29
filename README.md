@@ -22,12 +22,8 @@ aggregate them to common Census geographies, and now includes built-in
 analytical functions for commute flow statistics, longitudinal job
 change, and earnings tier shares.
 
-> \[!TIP\] Full documentation and the Getting Started vignette are
-> available at the [lehdr pkgdown
-> site](https://dillonma.github.io/lehdr/). \*\*For a detailed
-> walkthrough of all analytical functions and maps, see the [Getting
-> Started
-> vignette](https://dillonma.github.io/lehdr/articles/getting_started.html).
+> [!TIP] 
+> Full documentation and the Getting Started vignette are available at the [lehdr pkgdown site](https://dillonma.github.io/lehdr/). For a detailed walkthrough of all analytical functions and maps, see the [Getting Started vignette](https://dillonma.github.io/lehdr/articles/getting_started.html).
 
 ## Installation
 
