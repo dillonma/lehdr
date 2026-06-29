@@ -12,9 +12,8 @@ change, and earnings tier shares.
 
 > \[!TIP\] Full documentation and the Getting Started vignette are
 > available at the [lehdr pkgdown
-> site](https://dillonma.github.io/lehdr/). \*\*For a detailed
-> walkthrough of all analytical functions and maps, see the [Getting
-> Started
+> site](https://dillonma.github.io/lehdr/). For a detailed walkthrough
+> of all analytical functions and maps, see the [Getting Started
 > vignette](https://dillonma.github.io/lehdr/articles/getting_started.html).
 
 ## Installation
@@ -357,31 +356,23 @@ package](https://github.com/hrbrmstr/lodes).
 
 # Package index
 
-## Download LODES Data
-
-Functions for fetching LODES flat files and geographic crosswalks.
-
-- [`grab_lodes()`](https://dillonma.github.io/lehdr/reference/grab_lodes.md)
-  : Download and load LODES data into a data frame (tibble)
-- [`grab_crosswalk()`](https://dillonma.github.io/lehdr/reference/grab_crosswalk.md)
-  : Download and load LODES geographic crosswalk into a data frame
-  (tibble)
-
-## Analytical Functions
-
-Compute commute statistics, longitudinal change, and earnings
-distributions.
+## All functions
 
 - [`compute_commute_stats()`](https://dillonma.github.io/lehdr/reference/compute_commute_stats.md)
   : Compute commute flow statistics from LODES OD data
-- [`compute_lodes_change()`](https://dillonma.github.io/lehdr/reference/compute_lodes_change.md)
-  : Compute longitudinal change in LODES data across years
 - [`compute_earnings_share()`](https://dillonma.github.io/lehdr/reference/compute_earnings_share.md)
   : Compute earnings tier shares from LODES RAC or WAC data
+- [`compute_lodes_change()`](https://dillonma.github.io/lehdr/reference/compute_lodes_change.md)
+  : Compute longitudinal change in LODES data across years
+- [`grab_crosswalk()`](https://dillonma.github.io/lehdr/reference/grab_crosswalk.md)
+  : Download and load LODES geographic crosswalk into a data frame
+  (tibble)
+- [`grab_lodes()`](https://dillonma.github.io/lehdr/reference/grab_lodes.md)
+  : Download and load LODES data into a data frame (tibble)
 
 # Articles
 
-### Vignettes
+### All vignettes
 
 - [Getting Started with
   lehdr](https://dillonma.github.io/lehdr/articles/getting_started.md):
