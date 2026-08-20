@@ -1,9 +1,9 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   getting_started: getting_started.html
-last_built: 2026-06-29T16:09Z
+last_built: 2026-08-20T17:50Z
 urls:
   reference: https://dillonma.github.io/lehdr/reference
   article: https://dillonma.github.io/lehdr/articles
