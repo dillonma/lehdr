@@ -19,16 +19,16 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/dillonma/lehdr/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/jamgreen/lehdr/blob/master/inst/CITATION)
 
 Green J, Wang L, Mahmoudi D (2026). *lehdr: Grab Longitudinal
-Employer-Household Dynamics (LEHD) Flat Files*. R package version 1.2.0,
+Employer-Household Dynamics (LEHD) Flat Files*. R package version 1.2.2,
 <https://github.com/jamgreen/lehdr/>.
 
     @Manual{,
       title = {lehdr: Grab Longitudinal Employer-Household Dynamics (LEHD) Flat Files},
       author = {Jamaal Green and Liming Wang and Dillon Mahmoudi},
       year = {2026},
-      note = {R package version 1.2.0},
+      note = {R package version 1.2.2},
       url = {https://github.com/jamgreen/lehdr/},
     }
