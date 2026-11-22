@@ -8,8 +8,8 @@
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/lehdr)](https://cran.r-project.org/package=lehdr)
 [![metacran
 downloads](https://cranlogs.r-pkg.org/badges/lehdr)](https://cran.r-project.org/package=lehdr)
-[![R-CMD-check](https://github.com/dillonma/lehdr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/dillonma/lehdr/actions/workflows/R-CMD-check.yaml)
-[![pkgdown](https://github.com/dillonma/lehdr/actions/workflows/pkgdown.yaml/badge.svg)](https://dillonma.github.io/lehdr/)
+[![R-CMD-check](https://github.com/jamgreen/lehdr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jamgreen/lehdr/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/jamgreen/lehdr/actions/workflows/pkgdown.yaml/badge.svg)](https://jamgreen.github.io/lehdr/)
 <!-- badges: end -->
 
 **lehdr** (pronounced: *lee dur* like a metric *litre*) is an R package
@@ -23,10 +23,10 @@ analytical functions for commute flow statistics, longitudinal job
 change, and earnings tier shares.
 
 Full documentation and the Getting Started vignette are available at the
-**[lehdr pkgdown site](https://dillonma.github.io/lehdr/)**. For a
+**[lehdr pkgdown site](https://jamgreen.github.io/lehdr/)**. For a
 detailed walkthrough of all analytical functions and maps, see the
 **[Getting Started
-vignette](https://dillonma.github.io/lehdr/articles/getting_started.html)**.
+vignette](https://jamgreen.github.io/lehdr/articles/getting_started.html)**.
 
 ## Installation
 
@@ -157,8 +157,10 @@ plot(or_od_geo["h_geometry"], lwd = 0.25, add = TRUE)
 ```
 
 The optional `version` parameter selects the LODES vintage. LODES8
-(default) uses 2020 Census blocks. LODES7 uses 2010 Census blocks and
-ends in 2019. LODES5 uses 2000 Census blocks and ends in 2009.
+(default) uses 2020 Census blocks and covers 2002 onward (2002-2024 for
+most states; 2024 is not available for Alaska or Michigan). New LODES8
+years are available as soon as the Census Bureau publishes them, with no
+package update needed. LODES7 uses 2010 Census blocks and ends in 2019. LODES5 uses 2000 Census blocks and ends in 2009.
 
 ## Analytical Functions
 
@@ -329,9 +331,9 @@ If you use **lehdr** in published work, please cite it:
 citation("lehdr")
 ```
 
-Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2025. “lehdr: Grab
+Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2026. “lehdr: Grab
 Longitudinal Employer-Household Dynamics (LEHD) Flat Files.” R package
-version 1.2.0. <https://github.com/jamgreen/lehdr/>
+version 1.2.2. <https://github.com/jamgreen/lehdr/>
 
 ## Acknowledgements
 

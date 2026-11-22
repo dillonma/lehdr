@@ -1,7 +1,7 @@
 Type: Package
 Package: lehdr
 Title: Grab Longitudinal Employer-Household Dynamics (LEHD) Flat Files
-Version: 1.2.0
+Version: 1.2.2
 Authors@R: c(
     person("Jamaal", "Green", , "jamaal.green@gmail.com", role = c("cre", "aut"),
           comment = c(ORCID = "0000-0002-8322-8654")),
@@ -22,8 +22,8 @@ Description: Designed to query Longitudinal Employer-Household Dynamics
     Data comes from the LODES FTP server
     <https://lehd.ces.census.gov/data/lodes/LODES8/>.
 License: MIT + file LICENSE
-URL: https://dillonma.github.io/lehdr/, https://github.com/dillonma/lehdr/
-BugReports: https://github.com/dillonma/lehdr/issues/
+URL: https://jamgreen.github.io/lehdr/, https://github.com/jamgreen/lehdr/
+BugReports: https://github.com/jamgreen/lehdr/issues/
 Depends:
     R (>= 4.1.0)
 Imports:
@@ -50,4 +50,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.1

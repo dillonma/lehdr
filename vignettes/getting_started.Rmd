@@ -97,8 +97,11 @@ or_ri_od <- grab_lodes(
 head(or_ri_od)
 ```
 
-Not all state-year combinations are available for every LODES version. Consult
-the [LEHD Technical Document](https://lehd.ces.census.gov/data/lodes/LODES8/)
+Not all state-year combinations are available for every LODES version. LODES8,
+the default, currently covers 2002-2024 for most states (2024 is not
+available for Alaska or Michigan), and new years work as soon as the Census
+Bureau publishes them. Consult the
+[LEHD Technical Document](https://lehd.ces.census.gov/data/lodes/LODES8/)
 for availability.
 
 ### Aggregation levels
@@ -445,6 +448,6 @@ unlink(cache_dir, recursive = TRUE)
 If you use **lehdr** in published work, please cite it. Running
 `citation("lehdr")` will return a BibTeX entry. In Chicago author-date style:
 
-> Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2025. "lehdr: Grab
+> Green, Jamaal, Liming Wang, and Dillon Mahmoudi. 2026. "lehdr: Grab
 > Longitudinal Employer-Household Dynamics (LEHD) Flat Files." R package
-> version 1.2.0. https://github.com/jamgreen/lehdr/
+> version 1.2.2. https://github.com/jamgreen/lehdr/
